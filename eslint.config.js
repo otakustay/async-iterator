@@ -18,6 +18,13 @@ export default ts.config(
             '@typescript-eslint/no-unsafe-assignment': 'off',
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-empty-function': 'off',
+            '@typescript-eslint/array-type': [
+                'error',
+                {
+                    default: 'array-simple',
+                    readonly: 'array-simple',
+                },
+            ],
         },
     }
 );
