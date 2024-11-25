@@ -8,15 +8,24 @@ interface QueueItemError {
     error: Error;
 }
 
+interface QueueItemDone {
+    state: 'done';
+}
+
 interface YieldResult<T> {
     value: T;
     done: false;
 }
 
+interface YieldDone {
+    value: undefined;
+    done: true;
+}
+
 interface QueueItemPending<T> {
     state: 'pending';
-    promise: Promise<YieldResult<T>>;
-    resolve: (data: YieldResult<T>) => void;
+    promise: Promise<YieldResult<T> | YieldDone>;
+    resolve: (data: YieldResult<T> | YieldDone) => void;
     reject: (error: Error) => void;
 }
 
@@ -24,7 +33,7 @@ function createPendingItem<T>(): QueueItemPending<T> {
     const item: Partial<QueueItemPending<T>> = {
         state: 'pending',
     };
-    item.promise = new Promise<YieldResult<T>>((resolve, reject) => Object.assign(item, {resolve, reject}));
+    item.promise = new Promise((resolve, reject) => Object.assign(item, {resolve, reject}));
     return item as QueueItemPending<T>;
 }
 
@@ -34,7 +43,7 @@ function createPendingItem<T>(): QueueItemPending<T> {
 export class AsyncIteratorController<T = any> {
     private chunksCount = -1;
 
-    private readonly queue: Array<QueueItemResolved<T> | QueueItemPending<T> | QueueItemError> = [];
+    private readonly queue: Array<QueueItemResolved<T> | QueueItemPending<T> | QueueItemError | QueueItemDone> = [];
 
     private cursor = 0;
 
@@ -117,6 +126,21 @@ export class AsyncIteratorController<T = any> {
      * Mark current execution to a complete state.
      */
     complete() {
+        /* v8 ignore start */
+        if (this.chunksCount >= 0) {
+            return;
+        }
+        /* v8 ignore end */
+
+        const current = this.queue.at(this.cursor);
+
+        if (current && current.state === 'pending') {
+            current.resolve({value: undefined, done: true});
+        }
+
+        const item: QueueItemDone = {state: 'done'};
+        this.queue[this.cursor] = item;
+        this.cursor++;
         this.chunksCount = this.queue.length;
     }
 
@@ -133,10 +157,6 @@ export class AsyncIteratorController<T = any> {
                 };
                 const pull = (): Promise<IteratorResult<T>> => {
                     const index = state.cursor;
-                    if (this.chunksCount >= 0 && index >= this.chunksCount) {
-                        return Promise.resolve({value: undefined, done: true});
-                    }
-
                     const item = this.queue.at(index);
                     state.cursor++;
 
@@ -146,6 +166,8 @@ export class AsyncIteratorController<T = any> {
                                 return item.promise;
                             case 'resolved':
                                 return Promise.resolve({value: item.value, done: false});
+                            case 'done':
+                                return Promise.resolve({value: undefined, done: true});
                             case 'error':
                                 return Promise.reject(item.error);
                         }

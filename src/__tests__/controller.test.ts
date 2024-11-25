@@ -50,6 +50,14 @@ test('consume before put', async () => {
     expect(await iterator.next()).toEqual({done: true, value: undefined});
 });
 
+test('consume before complete', async () => {
+    const controller = new AsyncIteratorController();
+    const iterator = controller.toIterable()[Symbol.asyncIterator]();
+    const pendingValue = iterator.next();
+    controller.complete();
+    expect(await pendingValue).toEqual({done: true, value: undefined});
+});
+
 test('multiple iteration', async () => {
     const controller = new AsyncIteratorController();
     const iterable = controller.toIterable();
