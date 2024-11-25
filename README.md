@@ -2,7 +2,7 @@
 
 This package includes a `AsyncIteratorController` class for manually control the creation and yielding of an `AsyncIterator`, also it tries to provide a set of utility functions for `AsyncIterator`s.
 
-## AsyncIteratorController
+## Use a controller
 
 One problem using async generator functions is that it's hard to transform a data source other than an `AsyncIterable`, such as streams or events.
 
@@ -116,28 +116,6 @@ function* receiveMessages() {
 
 ### Example
 
-#### From a event emitter
-
-Infinite user event:
-
-```ts
-function fromClick(node: HTMLElement) {
-    const controller = new AsyncIteratorController<MouseEvent>();
-    node.addEventListener('click', event => controller.put(event));
-}
-```
-
-Finishable event:
-
-```ts
-function fromAnimation(animation: Animation) {
-    const controller = new AsyncIteratorController<number>();
-    animation.addEventListener('step', progress => controller.put(progress));
-    animation.addEventListener('finish', () => controller.complete());
-    return controller.toIterable();
-}
-```
-
 #### From a stream
 
 ```ts
@@ -189,5 +167,29 @@ function fromInterval(ms: number) {
         ms
     );
     return controller.toIterable();
+}
+```
+
+## Factory functions
+
+This library includes a set of factory functions to create async iterables from other sources.
+
+### From events
+
+You can leverage `fromEvent` function to create an async iterable from a NodeJS's `EventEmitter` or DOM's `EventTarget`.
+
+A infinite sequence of click events:
+
+```ts
+for await (const event of fromEvent(document.body, {dataEvent: 'click'})) {
+    // Click events
+}
+```
+
+Finishable event:
+
+```ts
+for await (const event of fromEvent(document.body, {dataEvent: 'input', finishEvent: 'change'})) {
+    // Type until focus changed
 }
 ```

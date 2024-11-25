@@ -25,6 +25,7 @@ export default ts.config(
                     readonly: 'array-simple',
                 },
             ],
+            '@typescript-eslint/restrict-template-expressions': 'off',
         },
     }
 );
