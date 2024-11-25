@@ -116,18 +116,6 @@ function* receiveMessages() {
 
 ### Example
 
-#### From a stream
-
-```ts
-function fromReadableStream(stream: Readable) {
-    const controller = new AsyncIteratorController<string>();
-    stream.on('data', chunk => controller.put(chunk));
-    stream.on('end', () => controller.complete());
-    stream.on('error', error => controller.error(error));
-    return controller.toIterable();
-}
-```
-
 #### From event source
 
 ```ts
@@ -193,3 +181,15 @@ for await (const event of fromEvent(document.body, {dataEvent: 'input', finishEv
     // Type until focus changed
 }
 ```
+
+### From streams
+
+Use `fromStream` function to create an async iterable from a NodeJS's `Readable` instance.
+
+```ts
+for await (const text of fromStream(fs.createReadStream('./file.txt'))) {
+    console.log(text);
+}
+```
+
+A `Readable` must have `data` event reporting chunks and `end` event to indicate the end of stream, an optional `error` event can be used to throw errors.
