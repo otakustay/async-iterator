@@ -87,9 +87,9 @@ export class AsyncIteratorController<T = any> {
      * Mark current execution to an error state.
      *
      * @param index The chunk index
-     * @param error The error reason
+     * @param error The error object or any value representing the error reason
      */
-    errorAt(index: number, error: Error) {
+    errorAt(index: number, ex: unknown) {
         /* v8 ignore start */
         if (this.chunksCount >= 0) {
             return;
@@ -98,6 +98,7 @@ export class AsyncIteratorController<T = any> {
 
         const current = this.queue.at(index);
 
+        const error = ex instanceof Error ? ex : new Error(`${ex}`);
         if (current && current.state === 'pending') {
             current.reject(error);
         }
@@ -116,9 +117,9 @@ export class AsyncIteratorController<T = any> {
     /**
      * Mark current execution to an error state.
      *
-     * @param error The error reason
+     * @param error The error object or any value representing the error reason
      */
-    error(error: Error) {
+    error(error: unknown) {
         this.errorAt(this.cursor, error);
     }
 

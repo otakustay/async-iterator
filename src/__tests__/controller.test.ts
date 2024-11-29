@@ -91,6 +91,14 @@ test('error first', async () => {
     await expect(iterator.next()).resolves.toEqual({done: true, value: undefined});
 });
 
+test('error no Error object', async () => {
+    const controller = new AsyncIteratorController();
+    controller.errorAt(0, 'Error');
+    const iterator = controller.toIterable()[Symbol.asyncIterator]();
+    await expect(iterator.next()).rejects.toThrow('Error');
+    await expect(iterator.next()).resolves.toEqual({done: true, value: undefined});
+});
+
 test('consume before error', async () => {
     const controller = new AsyncIteratorController();
     const iterator = controller.toIterable()[Symbol.asyncIterator]();
