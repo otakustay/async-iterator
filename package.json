@@ -1,8 +1,8 @@
 {
-  "name": "@otakustay/template-lib-ts",
+  "name": "@otakustay/async-iterator",
   "type": "module",
   "version": "1.0.0",
-  "description": "Template repository from TypeScript library project",
+  "description": "Utilities to control, create and consume async iterables",
   "license": "Apache-2.0",
   "exports": {
     ".": {
@@ -80,12 +80,12 @@
       ]
     }
   },
-  "homepage": "https://github.com/otakustay/template-lib-ts",
+  "homepage": "https://github.com/otakustay/async-iterator",
   "bugs": {
-    "url": "https://github.com/otakustay/template-lib-ts/issues"
+    "url": "https://github.com/otakustay/async-iterator/issues"
   },
   "author": "otakustay <otakustay@gmail.com> (https://github.com/otakustay)",
-  "repository": "github:otakustay/template-lib-ts",
+  "repository": "github:otakustay/async-iterator",
   "publishConfig": {
     "access": "public"
   },
