@@ -188,8 +188,20 @@ Use `fromStream` function to create an async iterable from a NodeJS's `Readable`
 
 ```ts
 for await (const text of fromStream(fs.createReadStream('./file.txt'))) {
-    console.log(text);
+    // One chunk from file
 }
 ```
 
 A `Readable` must have `data` event reporting chunks and `end` event to indicate the end of stream, an optional `error` event can be used to throw errors.
+
+### From stream reader
+
+Some DOM API returns a `ReadableStream` instance containing a `getReader()` method, this can be passed to `fromStreamReader` function to create an async iterable, the most common case is `fetch`.
+
+```ts
+const response = await fetch('...');
+
+for await (const text of fromStreamReader(response.body.getReader())) {
+    // One chunk from response
+}
+```

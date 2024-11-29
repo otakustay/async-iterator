@@ -8,10 +8,10 @@ test('put and consume', async () => {
     controller.putAt(2, 3);
     controller.complete();
     const iterator = controller.toIterable()[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({done: false, value: 1});
-    expect(await iterator.next()).toEqual({done: false, value: 2});
-    expect(await iterator.next()).toEqual({done: false, value: 3});
-    expect(await iterator.next()).toEqual({done: true, value: undefined});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 1});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 2});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 3});
+    await expect(iterator.next()).resolves.toEqual({done: true, value: undefined});
 });
 
 test('put auto index', async () => {
@@ -21,10 +21,10 @@ test('put auto index', async () => {
     controller.put(3);
     controller.complete();
     const iterator = controller.toIterable()[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({done: false, value: 1});
-    expect(await iterator.next()).toEqual({done: false, value: 2});
-    expect(await iterator.next()).toEqual({done: false, value: 3});
-    expect(await iterator.next()).toEqual({done: true, value: undefined});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 1});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 2});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 3});
+    await expect(iterator.next()).resolves.toEqual({done: true, value: undefined});
 });
 
 test('put mixed index', async () => {
@@ -34,10 +34,10 @@ test('put mixed index', async () => {
     controller.put(3);
     controller.complete();
     const iterator = controller.toIterable()[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({done: false, value: 1});
-    expect(await iterator.next()).toEqual({done: false, value: 2});
-    expect(await iterator.next()).toEqual({done: false, value: 3});
-    expect(await iterator.next()).toEqual({done: true, value: undefined});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 1});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 2});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 3});
+    await expect(iterator.next()).resolves.toEqual({done: true, value: undefined});
 });
 
 test('consume before put', async () => {
@@ -47,7 +47,7 @@ test('consume before put', async () => {
     controller.putAt(0, 1);
     controller.complete();
     expect(await pendingValue).toEqual({done: false, value: 1});
-    expect(await iterator.next()).toEqual({done: true, value: undefined});
+    await expect(iterator.next()).resolves.toEqual({done: true, value: undefined});
 });
 
 test('consume before complete', async () => {
@@ -79,8 +79,8 @@ test('put after done', async () => {
     controller.complete();
     controller.putAt(1, 2);
     const iterator = controller.toIterable()[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({done: false, value: 1});
-    expect(await iterator.next()).toEqual({done: true, value: undefined});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 1});
+    await expect(iterator.next()).resolves.toEqual({done: true, value: undefined});
 });
 
 test('error first', async () => {
@@ -88,7 +88,7 @@ test('error first', async () => {
     controller.errorAt(0, new Error('Error'));
     const iterator = controller.toIterable()[Symbol.asyncIterator]();
     await expect(iterator.next()).rejects.toThrow('Error');
-    expect(await iterator.next()).toEqual({done: true, value: undefined});
+    await expect(iterator.next()).resolves.toEqual({done: true, value: undefined});
 });
 
 test('consume before error', async () => {
@@ -104,6 +104,6 @@ test('error auto index', async () => {
     controller.put(1);
     controller.error(new Error('Error'));
     const iterator = controller.toIterable()[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({done: false, value: 1});
+    await expect(iterator.next()).resolves.toEqual({done: false, value: 1});
     await expect(iterator.next()).rejects.toThrow('Error');
 });

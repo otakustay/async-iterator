@@ -8,8 +8,8 @@ test('event emitter compatibility', async () => {
     emitter.emit('data', 1);
     emitter.emit('data', 2);
     const iterator = iterable[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({value: 1, done: false});
-    expect(await iterator.next()).toEqual({value: 2, done: false});
+    await expect(iterator.next()).resolves.toEqual({value: 1, done: false});
+    await expect(iterator.next()).resolves.toEqual({value: 2, done: false});
 });
 
 // @vitest-environment happy-dom
@@ -20,7 +20,7 @@ test('html element compatibility', async () => {
     element.dispatchEvent(event);
     element.dispatchEvent(new MouseEvent('blur'));
     const iterator = iterable[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({value: event, done: false});
+    await expect(iterator.next()).resolves.toEqual({value: event, done: false});
 });
 
 test('finish event', async () => {
@@ -29,8 +29,8 @@ test('finish event', async () => {
     emitter.emit('data', 1);
     emitter.emit('finish');
     const iterator = iterable[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({value: 1, done: false});
-    expect(await iterator.next()).toEqual({value: undefined, done: true});
+    await expect(iterator.next()).resolves.toEqual({value: 1, done: false});
+    await expect(iterator.next()).resolves.toEqual({value: undefined, done: true});
 });
 
 test('error event', async () => {
@@ -39,7 +39,7 @@ test('error event', async () => {
     emitter.emit('data', 1);
     emitter.emit('error', new Error('Error'));
     const iterator = iterable[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({value: 1, done: false});
+    await expect(iterator.next()).resolves.toEqual({value: 1, done: false});
     await expect(iterator.next()).rejects.toThrow('Error');
 });
 
@@ -49,7 +49,7 @@ test('default toError', async () => {
     emitter.emit('data', 1);
     emitter.emit('error', 123);
     const iterator = iterable[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({value: 1, done: false});
+    await expect(iterator.next()).resolves.toEqual({value: 1, done: false});
     await expect(iterator.next()).rejects.toThrow('123');
 });
 
@@ -66,6 +66,6 @@ test('custom toError', async () => {
     emitter.emit('data', 1);
     emitter.emit('error', 123);
     const iterator = iterable[Symbol.asyncIterator]();
-    expect(await iterator.next()).toEqual({value: 1, done: false});
+    await expect(iterator.next()).resolves.toEqual({value: 1, done: false});
     await expect(iterator.next()).rejects.toThrow('Error 123');
 });
