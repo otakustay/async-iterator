@@ -7,13 +7,13 @@ This package includes a `AsyncIteratorController` class for manually control the
 One problem using async generator functions is that it's hard to transform a data source other than an `AsyncIterable`, such as streams or events.
 
 ```ts
-function* readLines(file: string) {
-    const readable = fs.createReadStream(file);
-    const lines = readline.createInterface({input: readable});
-    readable.on(
-        'line',
-        line => {
+function* watchLocation() {
+    window.navigator.geolocation.watchPosition(
+        position => {
             // Now we are not able to yield it to parent function
+        },
+        error => {
+            // Also we are not able to throw an error to parent function
         }
     );
 }
@@ -26,26 +26,23 @@ This class is used to create a controller through which you can manually put val
 The basic usage is to use `put` method to yield data, and use `toIterable` to get an `AsyncIterable` object that can be used in a `for await...of` loop.
 
 ```ts
-function* readLines(file: string) {
-    const readable = fs.createReadStream(file);
-    const lines = readline.createInterface({input: readable});
-    const controller = new AsyncIteratorController<string>();
-    readable.on(
-        'line',
-        line => {
+function* watchLocation() {
+    const controller = new AsyncIteratorController<GeolocationPosition>();
+    window.navigator.geolocation.watchPosition(
+        position => {
             // Put it to async iterator
-            controller.put(line);
+            controller.put(position);
+        },
+        error => {
+            // Mark async iterator as errored
+            controller.error(error);
         }
     );
-    // Remember to mark the controller as completed
-    readable.on('close', () => controller.complete());
-    // Return the async iterable
-    return controller.toIterable();
 }
 
 // We can not consume it in a for await...of loop
-for await (const line of readLines('./file.txt')) {
-    console.log(line);
+for await (const position of watchLocation()) {
+    map.focusTo(position);
 }
 ```
 
