@@ -202,3 +202,16 @@ for await (const text of fromStreamReader(response.body.getReader())) {
     // One chunk from response
 }
 ```
+
+### From an array by interval
+
+Once you have an array of items already, but want to process them at a fixed interval, the `fromIntervalEach` factory function is useful.
+
+```ts
+const text = await fetch('...').then(r => r.text());
+
+// Print 60 characters per second
+for await (const char of fromIntervalEach(text, 16)) {
+    content.innerText += char;
+}
+```
