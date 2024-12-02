@@ -1,7 +1,7 @@
 {
   "name": "@otakustay/async-iterator",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Utilities to control, create and consume async iterables",
   "license": "Apache-2.0",
   "exports": {
