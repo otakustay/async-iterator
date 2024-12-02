@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/otakustay/async-iterator/compare/v1.0.0...v1.1.0) (2024-12-02)
+
+
+### Features
+
+* add over function to help transform an async iterable ([85e632f](https://github.com/otakustay/async-iterator/commit/85e632fee664f0d0f79be3a9a77b1b292046bd48))
+
 ## 1.0.0 (2024-11-29)
 
 
