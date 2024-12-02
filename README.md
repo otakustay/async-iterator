@@ -215,3 +215,23 @@ for await (const char of fromIntervalEach(text, 16)) {
     content.innerText += char;
 }
 ```
+
+## Iterable helper
+
+This library exports a `over` function to wrap an `AsyncIterable` with some extra helper methods, it enables you to chaining them.
+
+To see all possible methods on `over` function, please check the [OverAsyncIterator](./src/helper/index.ts) interface.
+
+Here we demostrate an example to consume a sequece `keyup` events, debounce them by 1 second, and map them to event data, take action to the last emit one until a `Enter` is pressed.
+
+```ts
+const keys = over(fromEvent(document.documentElement, 'keyup'))
+    .debounce(1000)
+    .map(events => events.at(-1)?.code)
+    .filter(code => !!code)
+    .until(code => code === 'Enter');
+
+for await (const key of keys) {
+    console.log('Pressed ${key}`);
+}
+```
