@@ -27,7 +27,7 @@ test('allow predicate to return promise', async () => {
 
 test('filter with async predicate', async () => {
     const iterable = filter(generate(), async v => {
-        await Promise.resolve(); // 模拟异步操作
+        await Promise.resolve();
         return v > 2;
     });
     const iterator = iterable[Symbol.asyncIterator]();
