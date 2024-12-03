@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/otakustay/async-iterator/compare/v1.1.0...v1.1.1) (2024-12-03)
+
+
+### Bug Fixes
+
+* publish build assets ([#23](https://github.com/otakustay/async-iterator/issues/23)) ([31d0d8a](https://github.com/otakustay/async-iterator/commit/31d0d8aa40b2355fdf4ac0d7996991f5de97b5a8))
+
 ## [1.1.0](https://github.com/otakustay/async-iterator/compare/v1.0.0...v1.1.0) (2024-12-02)
 
 
