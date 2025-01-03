@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.2](https://github.com/otakustay/async-iterator/compare/v1.1.1...v1.1.2) (2025-01-03)
+
+
+### Bug Fixes
+
+* update dependency @types/node to v22.10.2 ([#28](https://github.com/otakustay/async-iterator/issues/28)) ([274adf6](https://github.com/otakustay/async-iterator/commit/274adf62453d78176f559aab9c084f5eecbae3d2))
+* update dependency @types/node to v22.10.3 ([#48](https://github.com/otakustay/async-iterator/issues/48)) ([dc4d99c](https://github.com/otakustay/async-iterator/commit/dc4d99cfe946e85f6ac67d7eb796261e01f7ae42))
+* update dependency @types/node to v22.10.4 ([#50](https://github.com/otakustay/async-iterator/issues/50)) ([940f5e2](https://github.com/otakustay/async-iterator/commit/940f5e2132b411dccedfff034211de3187766ae8))
+* update dependency @types/node to v22.10.5 ([#52](https://github.com/otakustay/async-iterator/issues/52)) ([a82f9f3](https://github.com/otakustay/async-iterator/commit/a82f9f349cd3c580c12703c4394d1d9b71ce452a))
+
 ## [1.1.1](https://github.com/otakustay/async-iterator/compare/v1.1.0...v1.1.1) (2024-12-03)
 
 
