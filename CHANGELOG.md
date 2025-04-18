@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.1.2](https://github.com/otakustay/async-iterator/compare/v1.1.1...v1.1.2) (2025-04-18)
+
+
+### Bug Fixes
+
+* update dependency @types/node to v22.10.10 ([#77](https://github.com/otakustay/async-iterator/issues/77)) ([7102a02](https://github.com/otakustay/async-iterator/commit/7102a02bb06c2da3a4aaaf780f830490d9f29bd7))
+* update dependency @types/node to v22.10.2 ([#28](https://github.com/otakustay/async-iterator/issues/28)) ([274adf6](https://github.com/otakustay/async-iterator/commit/274adf62453d78176f559aab9c084f5eecbae3d2))
+* update dependency @types/node to v22.10.3 ([#48](https://github.com/otakustay/async-iterator/issues/48)) ([dc4d99c](https://github.com/otakustay/async-iterator/commit/dc4d99cfe946e85f6ac67d7eb796261e01f7ae42))
+* update dependency @types/node to v22.10.4 ([#50](https://github.com/otakustay/async-iterator/issues/50)) ([940f5e2](https://github.com/otakustay/async-iterator/commit/940f5e2132b411dccedfff034211de3187766ae8))
+* update dependency @types/node to v22.10.5 ([#52](https://github.com/otakustay/async-iterator/issues/52)) ([a82f9f3](https://github.com/otakustay/async-iterator/commit/a82f9f349cd3c580c12703c4394d1d9b71ce452a))
+* update dependency @types/node to v22.10.6 ([#60](https://github.com/otakustay/async-iterator/issues/60)) ([f3d414e](https://github.com/otakustay/async-iterator/commit/f3d414e628ffa6d319329b0ad934640bd231be8d))
+* update dependency @types/node to v22.10.7 ([#63](https://github.com/otakustay/async-iterator/issues/63)) ([d05a1f5](https://github.com/otakustay/async-iterator/commit/d05a1f5bcb2747fc8cbbf64e56884305a66e8114))
+* update dependency @types/node to v22.10.9 ([#75](https://github.com/otakustay/async-iterator/issues/75)) ([b472b15](https://github.com/otakustay/async-iterator/commit/b472b158882f5ee074f07a75de2d0a28a556fe8f))
+* update dependency @types/node to v22.12.0 ([#82](https://github.com/otakustay/async-iterator/issues/82)) ([094b4a1](https://github.com/otakustay/async-iterator/commit/094b4a15ddadb7c2267ec4f85256d310c6b203db))
+* update dependency @types/node to v22.13.0 ([#85](https://github.com/otakustay/async-iterator/issues/85)) ([97bcaee](https://github.com/otakustay/async-iterator/commit/97bcaee938aa3f63510edc350907ea2b183d2915))
+* update dependency @types/node to v22.13.1 ([#91](https://github.com/otakustay/async-iterator/issues/91)) ([b4186cd](https://github.com/otakustay/async-iterator/commit/b4186cd6e9f7a49545c037589638d536c83761a8))
+* update dependency @types/node to v22.13.10 ([#132](https://github.com/otakustay/async-iterator/issues/132)) ([e7d893c](https://github.com/otakustay/async-iterator/commit/e7d893c5fd308347c7d966145dd0d4412b80bed3))
+* update dependency @types/node to v22.13.11 ([#144](https://github.com/otakustay/async-iterator/issues/144)) ([71eb0b2](https://github.com/otakustay/async-iterator/commit/71eb0b21cc3ac0c3a79ac3ba3b4f3f6ee39af1ba))
+* update dependency @types/node to v22.13.13 ([#148](https://github.com/otakustay/async-iterator/issues/148)) ([34a74a2](https://github.com/otakustay/async-iterator/commit/34a74a24e7ffc6c5f2c96d46f6e3d1bc71e2efd7))
+* update dependency @types/node to v22.13.14 ([#150](https://github.com/otakustay/async-iterator/issues/150)) ([3dc4b38](https://github.com/otakustay/async-iterator/commit/3dc4b38aa39bab67bf0e6a109416c81a33781245))
+* update dependency @types/node to v22.13.17 ([#155](https://github.com/otakustay/async-iterator/issues/155)) ([eeede6e](https://github.com/otakustay/async-iterator/commit/eeede6ef23ab2e3bd511adb1f6f8935cfb6cd993))
+* update dependency @types/node to v22.13.2 ([#102](https://github.com/otakustay/async-iterator/issues/102)) ([aba65bc](https://github.com/otakustay/async-iterator/commit/aba65bc556ab4537ed26741134aa80b27eea4054))
+* update dependency @types/node to v22.13.4 ([#103](https://github.com/otakustay/async-iterator/issues/103)) ([4bd3f74](https://github.com/otakustay/async-iterator/commit/4bd3f7449b76b3b4e86c4d5c72321c504ede1929))
+* update dependency @types/node to v22.13.5 ([#109](https://github.com/otakustay/async-iterator/issues/109)) ([34393fc](https://github.com/otakustay/async-iterator/commit/34393fcc6cac2b567d89dc36dfb79ce1c592133d))
+* update dependency @types/node to v22.13.8 ([#119](https://github.com/otakustay/async-iterator/issues/119)) ([84f3f4c](https://github.com/otakustay/async-iterator/commit/84f3f4ce9a7e73eb7583bfcd069aaa2255eb566d))
+* update dependency @types/node to v22.13.9 ([#123](https://github.com/otakustay/async-iterator/issues/123)) ([3c28b5b](https://github.com/otakustay/async-iterator/commit/3c28b5b322f2b8457347162bb0e1e4cf3af8dacd))
+* update dependency @types/node to v22.14.0 ([#156](https://github.com/otakustay/async-iterator/issues/156)) ([9d57ab9](https://github.com/otakustay/async-iterator/commit/9d57ab98765c8be8acd20b617ed47822972c8aaf))
+* update dependency @types/node to v22.14.1 ([#164](https://github.com/otakustay/async-iterator/issues/164)) ([67c01eb](https://github.com/otakustay/async-iterator/commit/67c01ebbf412c22777a89f6a54f56f332b2789f0))
+
 ## [1.1.1](https://github.com/otakustay/async-iterator/compare/v1.1.0...v1.1.1) (2024-12-03)
 
 
