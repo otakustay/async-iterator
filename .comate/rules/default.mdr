@@ -1,0 +1,51 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+这是一个工具库，提供一系列的工具类来对async-iterable类型进行操作，可以将异步迭代器封装成和普通数组类似的形态，并使用各种方法对迭代器中的数据进行遍历、过滤、映射。
+
+代码库的核心有3部分：
+
+- 一个AsyncIteratorController类能进行异步迭代器的读写控制
+- 一个over函数对异步数据源进行封装，变成AsyncIteratorController
+- 一些factory函数将事件、定时器等不同源转为异步迭代器
+
+本代码库中的常见概念：
+
+- operator：也叫运算符、函数，指挂载在over函数上的一个运算符，处理一个输入与输出都是AsyncIterator类型的逻辑
+
+项目的主要结构：
+
+- src/controller.ts：实现AsyncIteratorController类，一个可以手动写入数据的异步迭代器
+- src/helper/index.ts：实现over函数把异步迭代器转为OverAsyncIterator对象，可以向数组一样操作
+- src/helper/operators/*：每一个文件包含一个over函数上的方法
+- src/factory/*：每个文件处理一种数据源转为异步迭代器
+- src/index.ts：最终导出用户可用到的函数和类
+
+当需要添加一个异步迭代器上的处理函数时，需要按以下步骤：
+
+1. 在src/helper/operators下新建对应的文件，在文件中实现一个输入和输出都是AsyncIterable类型的函数，注意泛型
+2. 在src/helper/operators/__tests__下补充单元测试，确保100%分支覆盖率
+3. 在src/helper/index.ts中引入新的函数，并在类型定义和具体实现中都加上该函数
+4. 在src/helper/__tests__/index.test.ts下，补充被over封装后的单元测试
+5. 在src/index.ts下，导出且**仅导出**新的函数使用到的类型，**不要**导出函数本身
+
+你可以参考src/helper/operators下的其它函数作为一个模板来实现新的处理函数，需要注意完全符合函数的输入输出类型，在over函数下完全可用
+
+在本代码库中编写代码，需要严格遵守以下要求：
+
+- 各操作函数**不是**数组的方法，**永远不要**引入lodash、rambda、rxjs等三方库，本项目不基于任何三方库实现
+- 所有代码均由TypeSript编写，类型必须正确且最大限度地严格
+- 任意代码变更都必须有相应的单元测试，单元测试放置在源码文件同级目录的__tests__子目录下，与源码文件同名，后缀为.test.ts
+- 使用细粒度的文件和函数拆分，函数不超过100行，文件不超过200行，但如果当前文件已经超过这些行数限制，你需要保持现状，**不要**对它们进行拆分
+- 在完成一次实现后，必须：
+    - 使用npm run build确保构建通过
+    - 使用npm run test确保单测通过，且分支覆盖率必须大于95%
+
+额外地，你需要关注以下行为：
+
+- 在当前项目的情境下，操作函数如map、group等**不是**数组上的方法，不等同lodash、ramda等库，它们都运作在异步迭代器（AsyncIterable）类型上
+- **不要**在src/index.ts中导出具体的操作函数，它们统一通过over函数被使用
+- 代码库的单元测试全部使用vitest框架进行，**测试框架不是jest**，在编写单元测试时，你需要使用import来引入test、expect等函数
+- **不允许**通过删除当前已经存在的测试用例来让单元测试通过，**不得**修改vitest.config.ts和tsconfig.json文件
