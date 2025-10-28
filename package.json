@@ -109,6 +109,6 @@
     "wireit": "^0.14.9"
   },
   "dependencies": {
-    "@types/node": "^22.10.1"
+    "@types/node": "^24.0.0"
   }
 }
